@@ -96,6 +96,7 @@ ln -s /fireeye/.bash_history ~/.bash_history
 # This took me FOREVER to get right.
 #
 sudo apt-get install -qy build-essential python-dev libevent-dev python-pip liblzma-dev
+#sudo apt-get install -qy gunicorn
 sudo chown vagrant:vagrant /opt
 git clone https://github.com/dotcloud/docker-registry.git /opt/docker-registry
 cd /opt/docker-registry
@@ -138,3 +139,22 @@ echo "54.84.80.249 docker.map.mandiant.com" | sudo tee -a /etc/hosts
 
 # docker tag aa08a7bcb97d localhost:5000/boo:000
 # docker push localhost:5000/boo:000
+
+#############################################################################
+### NOT TESTED!!!!!
+#############################################################################
+
+#
+# Allows you to 'ssh' into a running docker container.
+# https://jpetazzo.github.io/2014/03/23/lxc-attach-nsinit-nsenter-docker-0-9/
+# docker inspect your container to get the pid then do
+# nsenter --target $PID --mount --uts --ipc --net --pid
+#
+
+curl https://www.kernel.org/pub/linux/utils/util-linux/v2.24/util-linux-2.24.tar.gz | tar -zxf-
+cd util-linux-2.24
+./configure --without-ncurses
+make nsenter
+sudo mv nsenter /usr/local/bin
+cd ..
+rm -rf util-linux-2.24
