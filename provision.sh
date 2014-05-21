@@ -89,7 +89,7 @@ sudo dpkg -i /vagrant/zeromq4-dev_20140428-1_amd64.deb
 
 echo "alias d='docker'" >> ~/.bashrc
 rm -f ~/.bash_history
-ln -s ~/fireeye/.bash_history ~/.bash_history
+ln -s /fireeye/.bash_history ~/.bash_history
 
 #
 # Run local docker registry
